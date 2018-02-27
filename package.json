@@ -1,0 +1,30 @@
+{
+  "name": "@yamadayuki/bs-easing-functions",
+  "description": "easing-functions for ReasonML and BuckleScript",
+  "version": "0.0.0",
+  "author": "yamadayuki",
+  "bugs": "https://github.com/yamadayuki/bs-easing-functions/issues",
+  "devDependencies": {
+    "bs-platform": "^2.2.0"
+  },
+  "homepage": "https://github.com/yamadayuki/bs-easing-functions",
+  "keywords": [
+    "bucklescript",
+    "easing",
+    "reason"
+  ],
+  "license": "MIT",
+  "main": "lib/js/src/Easing.bs.js",
+  "repository": {
+    "url": "https://github.com/yamadayuki/bs-easing-functions"
+  },
+  "scripts": {
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world",
+    "release": "npm run release-patch",
+    "release-major": "npm version major && git push origin master --tags && npm publish --access=public",
+    "release-minor": "npm version minor && git push origin master --tags && npm publish --access=public",
+    "release-patch": "npm version patch && git push origin master --tags && npm publish --access=public",
+    "start": "bsb -make-world -w"
+  }
+}

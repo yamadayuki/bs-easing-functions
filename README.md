@@ -4,13 +4,13 @@ Utility of easing functions for [BuckleScript](https://github.com/bloomberg/buck
 
 # Installation
 
-1. Install `@yamadayuki/bs-easing-functions`
+1.  Install `@yamadayuki/bs-easing-functions`
 
 ```sh
 $ npm install --save @yamadayuki/bs-easing-functions
 ```
 
-2. Add `@yamadayuki/bs-easing-functions` to `bs-dependencies` section of `bsconfig.json`.
+2.  Add `@yamadayuki/bs-easing-functions` to `bs-dependencies` section of `bsconfig.json`.
 
 # Usage
 

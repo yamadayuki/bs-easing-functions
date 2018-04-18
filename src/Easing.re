@@ -24,7 +24,7 @@ let easeOutInSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -55,7 +55,7 @@ let easeOutInQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -68,7 +68,8 @@ let easeOutCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   c *. (t_ *. t_ *. t_ +. 1.) +. b;
 };
 
-let easeInOutCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
+let easeInOutCubic =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t_ = t /. d;
   t_ /. 2. < 1. ?
     c /. 2. *. t_ *. t_ *. t_ +. b :
@@ -78,7 +79,8 @@ let easeInOutCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
     };
 };
 
-let easeOutInCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
+let easeOutInCubic =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   t < d /. 2. ?
     easeOutCubic(t *. 2., ~start=b, ~final=c /. 2., ~duration=d, ()) :
     easeInCubic(
@@ -86,7 +88,7 @@ let easeOutInCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -99,7 +101,8 @@ let easeOutQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   -. c *. (t_ *. t_ *. t_ *. t_ -. 1.) +. b;
 };
 
-let easeInOutQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
+let easeInOutQuart =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t_ = t /. d;
   t_ /. 2. < 1. ?
     c /. 2. *. t_ *. t_ *. t_ *. t_ +. b :
@@ -109,7 +112,8 @@ let easeInOutQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
     };
 };
 
-let easeOutInQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
+let easeOutInQuart =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   t < d /. 2. ?
     easeOutQuart(t *. 2., ~start=b, ~final=c /. 2., ~duration=d, ()) :
     easeInQuart(
@@ -117,7 +121,7 @@ let easeOutInQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -130,7 +134,8 @@ let easeOutQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   c *. (t_ *. t_ *. t_ *. t_ *. t_ +. 1.) +. b;
 };
 
-let easeInOutQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
+let easeInOutQuint =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t_ = t /. d;
   t_ /. 2. < 1. ?
     c /. 2. *. t_ *. t_ *. t_ *. t_ *. t_ +. b :
@@ -140,7 +145,8 @@ let easeInOutQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
     };
 };
 
-let easeOutInQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
+let easeOutInQuint =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   t < d /. 2. ?
     easeOutQuint(t *. 2., ~start=b, ~final=c /. 2., ~duration=d, ()) :
     easeInQuint(
@@ -148,11 +154,12 @@ let easeOutInQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) 
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
-  t == 0. ? b : c *. Math.pow_float(~base=2., ~exp=10. *. (t /. d -. 1.)) +. b;
+  t == 0. ?
+    b : c *. Math.pow_float(~base=2., ~exp=10. *. (t /. d -. 1.)) +. b;
 
 let easeOutExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   t == d ?
@@ -183,7 +190,7 @@ let easeOutInExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -214,7 +221,7 @@ let easeOutInCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -246,7 +253,7 @@ let easeOutInBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeInElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -266,7 +273,8 @@ let easeInElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     };
 };
 
-let easeOutElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
+let easeOutElastic =
+    (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t_ = t /. d;
   t_ == 1. ?
     b +. c :
@@ -316,7 +324,7 @@ let easeOutInElastic =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let easeOutBounce = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
@@ -359,7 +367,7 @@ let easeOutInBounce =
       ~start=b +. c /. 2.,
       ~final=c /. 2.,
       ~duration=d,
-      ()
+      (),
     );
 
 let linear = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>

@@ -327,21 +327,20 @@ let easeOutInElastic =
       (),
     );
 
-let easeOutBounce = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t' = t /. d;
-  if (t' < 1. /. 2.75) {
-    c *. (7.5625 *. t' *. t') +. b;
-  } else if (t' < 2. /. 2.75) {
-    let t'' = t' -. 1.5 /. 2.75;
-    c *. (7.5625 *. t'' *. t'' +. 0.75) +. b;
-  } else if (t' < 2.5 /. 2.75) {
-    let t'' = t' -. 2.25 /. 2.75;
-    c *. (7.5625 *. t'' *. t'' +. 0.9375) +. b;
-  } else {
-    let t'' = t' -. 2.625 /. 2.75;
-    c *. (7.5625 *. t'' *. t'' +. 0.984375) +. b;
+let easeOutBounce = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
+  switch (t /. d) {
+  | n when n < 1. /. 2.75 => c *. (7.5625 *. n *. n) +. b
+  | n when n < 2. /. 2.75 =>
+    let t' = n -. 1.5 /. 2.75;
+    c *. (7.5625 *. t' *. t' +. 0.75) +. b;
+
+  | n when n < 2.5 /. 2.75 =>
+    let t' = n -. 2.25 /. 2.75;
+    c *. (7.5625 *. t' *. t' +. 0.9375) +. b;
+  | n =>
+    let t' = n -. 2.625 /. 2.75;
+    c *. (7.5625 *. t' *. t' +. 0.984375) +. b;
   };
-};
 
 let easeInBounce = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   c -. easeOutBounce(d -. t, ~start=0., ~final=c, ~duration=d, ()) +. b;

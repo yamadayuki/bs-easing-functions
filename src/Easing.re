@@ -7,12 +7,12 @@ let easeOutSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
   c *. Math.sin(t /. d *. (Math._PI /. 2.)) +. b;
 
 let easeInOutSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
+  let t' = t /. d;
+  t' /. 2. < 1. ?
     c /. 2. *. Math.sin(Math._PI *. t /. 2.) +. b :
     {
-      let t__ = t_ -. 1.;
-      -. c /. 2. *. (Math.cos(Math._PI *. t__ /. 2.) -. 2.) +. b;
+      let t'' = t' -. 1.;
+      -. c /. 2. *. (Math.cos(Math._PI *. t'' /. 2.) -. 2.) +. b;
     };
 };
 
@@ -28,22 +28,22 @@ let easeOutInSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     );
 
 let easeInQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. t_ *. t_ +. b;
+  let t' = t /. d;
+  c *. t' *. t' +. b;
 };
 
 let easeOutQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  -. c *. t_ *. (t_ -. 2.) +. b;
+  let t' = t /. d;
+  -. c *. t' *. (t' -. 2.) +. b;
 };
 
 let easeInOutQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
-    c /. 2. *. t_ *. t_ +. b :
+  let t' = t /. d;
+  t' /. 2. < 1. ?
+    c /. 2. *. t' *. t' +. b :
     {
-      let t__ = t_ -. 1.;
-      (-1.) *. c /. 2. *. (t__ *. (t__ -. 2.) -. 1.) +. b;
+      let t'' = t' -. 1.;
+      (-1.) *. c /. 2. *. (t'' *. (t'' -. 2.) -. 1.) +. b;
     };
 };
 
@@ -59,23 +59,23 @@ let easeOutInQuad = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     );
 
 let easeInCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. t_ *. t_ *. t_ +. b;
+  let t' = t /. d;
+  c *. t' *. t' *. t' +. b;
 };
 
 let easeOutCubic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d -. 1.;
-  c *. (t_ *. t_ *. t_ +. 1.) +. b;
+  let t' = t /. d -. 1.;
+  c *. (t' *. t' *. t' +. 1.) +. b;
 };
 
 let easeInOutCubic =
     (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
-    c /. 2. *. t_ *. t_ *. t_ +. b :
+  let t' = t /. d;
+  t' /. 2. < 1. ?
+    c /. 2. *. t' *. t' *. t' +. b :
     {
-      let t__ = t_ -. 2.;
-      c /. 2. *. (t__ *. t__ *. t__ +. 2.) +. b;
+      let t'' = t' -. 2.;
+      c /. 2. *. (t'' *. t'' *. t'' +. 2.) +. b;
     };
 };
 
@@ -92,23 +92,23 @@ let easeOutInCubic =
     );
 
 let easeInQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. t_ *. t_ *. t_ *. t_ +. b;
+  let t' = t /. d;
+  c *. t' *. t' *. t' *. t' +. b;
 };
 
 let easeOutQuart = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d -. 1.;
-  -. c *. (t_ *. t_ *. t_ *. t_ -. 1.) +. b;
+  let t' = t /. d -. 1.;
+  -. c *. (t' *. t' *. t' *. t' -. 1.) +. b;
 };
 
 let easeInOutQuart =
     (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
-    c /. 2. *. t_ *. t_ *. t_ *. t_ +. b :
+  let t' = t /. d;
+  t' /. 2. < 1. ?
+    c /. 2. *. t' *. t' *. t' *. t' +. b :
     {
-      let t__ = t_ -. 2.;
-      -. c /. 2. *. (t__ *. t__ *. t__ *. t__ -. 2.) +. b;
+      let t'' = t' -. 2.;
+      -. c /. 2. *. (t'' *. t'' *. t'' *. t'' -. 2.) +. b;
     };
 };
 
@@ -125,23 +125,23 @@ let easeOutInQuart =
     );
 
 let easeInQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. t_ *. t_ *. t_ *. t_ *. t_ +. b;
+  let t' = t /. d;
+  c *. t' *. t' *. t' *. t' *. t' +. b;
 };
 
 let easeOutQuint = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d -. 1.;
-  c *. (t_ *. t_ *. t_ *. t_ *. t_ +. 1.) +. b;
+  let t' = t /. d -. 1.;
+  c *. (t' *. t' *. t' *. t' *. t' +. 1.) +. b;
 };
 
 let easeInOutQuint =
     (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
-    c /. 2. *. t_ *. t_ *. t_ *. t_ *. t_ +. b :
+  let t' = t /. d;
+  t' /. 2. < 1. ?
+    c /. 2. *. t' *. t' *. t' *. t' *. t' +. b :
     {
-      let t__ = t_ -. 2.;
-      c /. 2. *. (t__ *. t__ *. t__ *. t__ *. t__ +. 2.) +. b;
+      let t'' = t' -. 2.;
+      c /. 2. *. (t'' *. t'' *. t'' *. t'' *. t'' +. 2.) +. b;
     };
 };
 
@@ -167,17 +167,17 @@ let easeOutExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
     c *. (-. Math.pow_float(~base=2., ~exp=(-10.) *. t /. d) +. 1.) +. b;
 
 let easeInOutExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
+  let t' = t /. d;
   if (t == 0.) {
     b;
   } else if (t == d) {
     b +. c;
-  } else if (t_ /. 2. < 1.) {
-    c /. 2. *. Math.pow_float(~base=2., ~exp=10. *. (t_ -. 1.)) +. b;
+  } else if (t' /. 2. < 1.) {
+    c /. 2. *. Math.pow_float(~base=2., ~exp=10. *. (t' -. 1.)) +. b;
   } else {
     c
     /. 2.
-    *. (-. Math.pow_float(~base=2., ~exp=(-10.) *. (t_ -. 1.)) +. 2.)
+    *. (-. Math.pow_float(~base=2., ~exp=(-10.) *. (t' -. 1.)) +. 2.)
     +. b;
   };
 };
@@ -194,22 +194,22 @@ let easeOutInExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     );
 
 let easeInCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  -. c *. (Math.sqrt(1. -. t_ *. t_) -. 1.) +. b;
+  let t' = t /. d;
+  -. c *. (Math.sqrt(1. -. t' *. t') -. 1.) +. b;
 };
 
 let easeOutCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d -. 1.;
-  -. c *. (Math.sqrt(1. -. t_ *. t_) *. t_) +. b;
+  let t' = t /. d -. 1.;
+  -. c *. (Math.sqrt(1. -. t' *. t') *. t') +. b;
 };
 
 let easeInOutCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. < 1. ?
-    -. c /. 2. *. (Math.sqrt(1. -. t_ *. t_) -. 1.) +. b :
+  let t' = t /. d;
+  t' /. 2. < 1. ?
+    -. c /. 2. *. (Math.sqrt(1. -. t' *. t') -. 1.) +. b :
     {
-      let t__ = t_ -. 2.;
-      c /. 2. *. (Math.sqrt(1. -. t__ *. t__) +. 1.) +. b;
+      let t'' = t' -. 2.;
+      c /. 2. *. (Math.sqrt(1. -. t'' *. t'') +. 1.) +. b;
     };
 };
 
@@ -225,23 +225,23 @@ let easeOutInCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     );
 
 let easeInBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. t_ *. t_ *. ((1.70158 +. 1.) *. t_ -. 1.70158) +. b;
+  let t' = t /. d;
+  c *. t' *. t' *. ((1.70158 +. 1.) *. t' -. 1.70158) +. b;
 };
 
 let easeOutBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  c *. ((t_ -. 1.) *. t_ *. ((1.70158 +. 1.) *. t_ +. 1.70158) +. 1.) +. b;
+  let t' = t /. d;
+  c *. ((t' -. 1.) *. t' *. ((1.70158 +. 1.) *. t' +. 1.70158) +. 1.) +. b;
 };
 
 let easeInOutBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let s = 1.70158 *. 1.525;
-  let t_ = t /. d;
+  let t' = t /. d;
   t /. 2. < 1. ?
-    c /. 2. *. (t_ *. t_ *. ((s +. 1.) *. t_ -. s)) +. b :
+    c /. 2. *. (t' *. t' *. ((s +. 1.) *. t' -. s)) +. b :
     {
-      let t__ = t_ -. 2.;
-      c /. 2. *. (t__ *. t__ *. ((s +. 1.) *. t +. s) +. 2.) +. b;
+      let t'' = t' -. 2.;
+      c /. 2. *. (t'' *. t'' *. ((s +. 1.) *. t +. s) +. 2.) +. b;
     };
 };
 
@@ -257,17 +257,17 @@ let easeOutInBack = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
     );
 
 let easeInElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ == 1. ?
+  let t' = t /. d;
+  t' == 1. ?
     b +. c :
     {
       let p = d *. 0.3;
       let s = p /. 4.;
-      let t__ = t_ -. 1.;
+      let t'' = t' -. 1.;
       -. (
         c
-        *. Math.pow_float(~base=2., ~exp=10. *. t__)
-        *. Math.sin((t__ *. d -. s) *. (2. *. Math._PI) /. p)
+        *. Math.pow_float(~base=2., ~exp=10. *. t'')
+        *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
       )
       +. b;
     };
@@ -275,15 +275,15 @@ let easeInElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
 
 let easeOutElastic =
     (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ == 1. ?
+  let t' = t /. d;
+  t' == 1. ?
     b +. c :
     {
       let p = d *. 0.3;
       let s = p /. 4.;
       c
-      *. Math.pow_float(~base=2., ~exp=(-10.) *. t_)
-      *. Math.sin((t_ *. d -. s) *. (2. *. Math._PI) /. p)
+      *. Math.pow_float(~base=2., ~exp=(-10.) *. t')
+      *. Math.sin((t' *. d -. s) *. (2. *. Math._PI) /. p)
       +. c
       +. b;
     };
@@ -291,24 +291,24 @@ let easeOutElastic =
 
 let easeInOutElastic =
     (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  t_ /. 2. == 2. ?
+  let t' = t /. d;
+  t' /. 2. == 2. ?
     b +. c :
     {
       let p = d *. (0.3 *. 1.5);
       let s = p /. 4.;
-      let t__ = t_ -. 1.;
-      t_ < 1. ?
+      let t'' = t' -. 1.;
+      t' < 1. ?
         (-0.5)
         *. (
           c
-          *. Math.pow_float(~base=2., ~exp=10. *. t__)
-          *. Math.sin((t__ *. d -. s) *. (2. *. Math._PI) /. p)
+          *. Math.pow_float(~base=2., ~exp=10. *. t'')
+          *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
         )
         +. b :
         c
-        *. Math.pow_float(~base=2., ~exp=(-10.) *. t__)
-        *. Math.sin((t__ *. d -. s) *. (2. *. Math._PI) /. p)
+        *. Math.pow_float(~base=2., ~exp=(-10.) *. t'')
+        *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
         *. 0.5
         +. c
         +. b;
@@ -328,18 +328,18 @@ let easeOutInElastic =
     );
 
 let easeOutBounce = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
-  let t_ = t /. d;
-  if (t_ < 1. /. 2.75) {
-    c *. (7.5625 *. t_ *. t_) +. b;
-  } else if (t_ < 2. /. 2.75) {
-    let t__ = t_ -. 1.5 /. 2.75;
-    c *. (7.5625 *. t__ *. t__ +. 0.75) +. b;
-  } else if (t_ < 2.5 /. 2.75) {
-    let t__ = t_ -. 2.25 /. 2.75;
-    c *. (7.5625 *. t__ *. t__ +. 0.9375) +. b;
+  let t' = t /. d;
+  if (t' < 1. /. 2.75) {
+    c *. (7.5625 *. t' *. t') +. b;
+  } else if (t' < 2. /. 2.75) {
+    let t'' = t' -. 1.5 /. 2.75;
+    c *. (7.5625 *. t'' *. t'' +. 0.75) +. b;
+  } else if (t' < 2.5 /. 2.75) {
+    let t'' = t' -. 2.25 /. 2.75;
+    c *. (7.5625 *. t'' *. t'' +. 0.9375) +. b;
   } else {
-    let t__ = t_ -. 2.625 /. 2.75;
-    c *. (7.5625 *. t__ *. t__ +. 0.984375) +. b;
+    let t'' = t' -. 2.625 /. 2.75;
+    c *. (7.5625 *. t'' *. t'' +. 0.984375) +. b;
   };
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "@yamadayuki/bs-easing-functions",
   "description": "easing-functions for ReasonML and BuckleScript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "yamadayuki",
   "bugs": "https://github.com/yamadayuki/bs-easing-functions/issues",
   "devDependencies": {

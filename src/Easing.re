@@ -1,18 +1,18 @@
 open Js;
 
 let easeInSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
-  -. c *. Math.cos(t /. d *. (Math._PI /. 2.)) +. c +. b;
+  -. c *. cos(t /. d *. (Math._PI /. 2.)) +. c +. b;
 
 let easeOutSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =>
-  c *. Math.sin(t /. d *. (Math._PI /. 2.)) +. b;
+  c *. sin(t /. d *. (Math._PI /. 2.)) +. b;
 
 let easeInOutSine = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t' = t /. d;
   t' /. 2. < 1. ?
-    c /. 2. *. Math.sin(Math._PI *. t /. 2.) +. b :
+    c /. 2. *. sin(Math._PI *. t /. 2.) +. b :
     {
       let t'' = t' -. 1.;
-      -. c /. 2. *. (Math.cos(Math._PI *. t'' /. 2.) -. 2.) +. b;
+      -. c /. 2. *. (cos(Math._PI *. t'' /. 2.) -. 2.) +. b;
     };
 };
 
@@ -195,21 +195,21 @@ let easeOutInExpo = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
 
 let easeInCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t' = t /. d;
-  -. c *. (Math.sqrt(1. -. t' *. t') -. 1.) +. b;
+  -. c *. (sqrt(1. -. t' *. t') -. 1.) +. b;
 };
 
 let easeOutCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t' = t /. d -. 1.;
-  -. c *. (Math.sqrt(1. -. t' *. t') *. t') +. b;
+  -. c *. (sqrt(1. -. t' *. t') *. t') +. b;
 };
 
 let easeInOutCirc = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) => {
   let t' = t /. d;
   t' /. 2. < 1. ?
-    -. c /. 2. *. (Math.sqrt(1. -. t' *. t') -. 1.) +. b :
+    -. c /. 2. *. (sqrt(1. -. t' *. t') -. 1.) +. b :
     {
       let t'' = t' -. 2.;
-      c /. 2. *. (Math.sqrt(1. -. t'' *. t'') +. 1.) +. b;
+      c /. 2. *. (sqrt(1. -. t'' *. t'') +. 1.) +. b;
     };
 };
 
@@ -267,7 +267,7 @@ let easeInElastic = (t, ~start as b=0., ~final as c=1., ~duration as d=1., ()) =
       -. (
         c
         *. Math.pow_float(~base=2., ~exp=10. *. t'')
-        *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
+        *. sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
       )
       +. b;
     };
@@ -283,7 +283,7 @@ let easeOutElastic =
       let s = p /. 4.;
       c
       *. Math.pow_float(~base=2., ~exp=(-10.) *. t')
-      *. Math.sin((t' *. d -. s) *. (2. *. Math._PI) /. p)
+      *. sin((t' *. d -. s) *. (2. *. Math._PI) /. p)
       +. c
       +. b;
     };
@@ -303,12 +303,12 @@ let easeInOutElastic =
         *. (
           c
           *. Math.pow_float(~base=2., ~exp=10. *. t'')
-          *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
+          *. sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
         )
         +. b :
         c
         *. Math.pow_float(~base=2., ~exp=(-10.) *. t'')
-        *. Math.sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
+        *. sin((t'' *. d -. s) *. (2. *. Math._PI) /. p)
         *. 0.5
         +. c
         +. b;

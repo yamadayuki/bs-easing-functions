@@ -5,6 +5,7 @@
   "author": "yamadayuki",
   "bugs": "https://github.com/yamadayuki/bs-easing-functions/issues",
   "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.7",
     "bs-platform": "^4.0.6"
   },
   "homepage": "https://github.com/yamadayuki/bs-easing-functions",
@@ -25,6 +26,8 @@
     "release-major": "npm version major && git push origin master --tags && npm publish --access=public",
     "release-minor": "npm version minor && git push origin master --tags && npm publish --access=public",
     "release-patch": "npm version patch && git push origin master --tags && npm publish --access=public",
-    "start": "bsb -make-world -w"
+    "start": "bsb -make-world -w",
+    "pretest": "npm run build",
+    "test": "jest"
   }
 }

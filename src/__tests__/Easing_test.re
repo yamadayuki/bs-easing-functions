@@ -1,322 +1,289 @@
 open Jest;
 open ExpectJs;
 
-type easingFunctionT =
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
+type expected = (float => float, array(float));
 
-let testCases = (targetFn: easingFunctionT, mode, expectedTable) => {
-  let start = 0.;
-  let final = 100.;
-  let duration = 100.;
-  let elapsedTable = [|0., 25., 50., 75., 100.|];
+type expectedTable = {
+  in_: expected,
+  out: expected,
+  inOut: expected,
+  outIn: expected,
+};
 
-  describe(mode, () =>
+let testCases = (expectedTable: expectedTable) => {
+  let elapsedTable = [|0., 0.25, 0.5, 0.75, 1.|];
+
+  let {in_, out, inOut, outIn} = expectedTable;
+
+  describe("in", () =>
     elapsedTable->Belt.Array.forEachWithIndex((index, elapsed) =>
-      test({j|t: $elapsed|j}, () =>
-        expect(targetFn(elapsed, ~start, ~final, ~duration, ()))
-        |> toBeSoCloseTo(~digits=1, expectedTable[index])
-      )
+      test({j|t: $elapsed|j}, () => {
+        let (fn, table) = in_;
+        expect(fn(elapsed)) |> toBeCloseTo(table[index]);
+      })
+    )
+  );
+
+  describe("out", () =>
+    elapsedTable->Belt.Array.forEachWithIndex((index, elapsed) =>
+      test({j|t: $elapsed|j}, () => {
+        let (fn, table) = out;
+        expect(fn(elapsed)) |> toBeCloseTo(table[index]);
+      })
+    )
+  );
+
+  describe("in-out", () =>
+    elapsedTable->Belt.Array.forEachWithIndex((index, elapsed) =>
+      test({j|t: $elapsed|j}, () => {
+        let (fn, table) = inOut;
+        expect(fn(elapsed)) |> toBeCloseTo(table[index]);
+      })
+    )
+  );
+
+  describe("out-in", () =>
+    elapsedTable->Belt.Array.forEachWithIndex((index, elapsed) =>
+      test({j|t: $elapsed|j}, () => {
+        let (fn, table) = outIn;
+        expect(fn(elapsed)) |> toBeCloseTo(table[index]);
+      })
     )
   );
 };
 
 let () =
   describe("Easing functions", () => {
-    describe("sine", () => {
-      testCases(
-        Easing.easeInSine,
-        "in",
-        [|
-          0.,
-          7.612046748871322,
-          29.289321881345245,
-          61.73165676349102,
-          100.,
-        |],
-      );
-
-      testCases(
-        Easing.easeOutSine,
-        "out",
-        [|
-          0.,
-          38.268343236508976,
-          70.71067811865474,
-          92.38795325112868,
-          100.,
-        |],
-      );
-
-      testCases(
-        Easing.easeInOutSine,
-        "in-out",
-        [|0., 14.64466094067262, 50., 85.35533905932738, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInSine,
-        "out-in",
-        [|0., 35.35533905932737, 50., 64.64466094067262, 100.|],
-      );
-    });
-
-    describe("quad", () => {
-      testCases(Easing.easeInQuad, "in", [|0., 6.25, 25., 56.25, 100.|]);
-
-      testCases(Easing.easeOutQuad, "out", [|0., 43.75, 75., 93.75, 100.|]);
-
-      testCases(
-        Easing.easeInOutQuad,
-        "in-out",
-        [|0., 12.5, 50., 87.5, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInQuad,
-        "out-in",
-        [|0., 37.5, 50., 62.5, 100.|],
-      );
-    });
-
-    describe("cubic", () => {
-      testCases(
-        Easing.easeInCubic,
-        "in",
-        [|0., 1.5625, 12.5, 42.1875, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutCubic,
-        "out",
-        [|0., 57.8125, 87.5, 98.4375, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutCubic,
-        "in-out",
-        [|0., 6.25, 50., 93.75, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInCubic,
-        "out-in",
-        [|0., 43.75, 50., 56.25, 100.|],
-      );
-    });
-
-    describe("quart", () => {
-      testCases(
-        Easing.easeInQuart,
-        "in",
-        [|0., 0.390625, 6.25, 31.640625, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutQuart,
-        "out",
-        [|0., 68.359375, 93.75, 99.609375, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutQuart,
-        "in-out",
-        [|0., 3.125, 50., 96.875, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInQuart,
-        "out-in",
-        [|0., 46.875, 50., 53.125, 100.|],
-      );
-    });
-
-    describe("quint", () => {
-      testCases(
-        Easing.easeInQuint,
-        "in",
-        [|0., 0.9765625, 3.125, 23.73046875, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutQuint,
-        "out",
-        [|0., 76.26953125, 96.875, 99.90234375, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutQuint,
-        "in-out",
-        [|0., 1.5625, 50., 98.4375, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInQuint,
-        "out-in",
-        [|0., 48.4375, 50., 51.5625, 100.|],
-      );
-    });
-
-    describe("expo", () => {
-      testCases(
-        Easing.easeInExpo,
-        "in",
-        [|0., 0.5524271728019903, 3.125, 17.67766952966369, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutExpo,
-        "out",
-        [|0., 82.32233047033631, 96.875, 99.447572827198, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutExpo,
-        "in-out",
-        [|0., 1.5625, 50., 98.4375, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInExpo,
-        "out-in",
-        [|0., 48.4375, 50., 51.5625, 100.|],
-      );
-    });
-
-    describe("circ", () => {
-      testCases(
-        Easing.easeInCirc,
-        "in",
-        [|
-          0.,
-          3.1754163448145745,
-          13.397459621556141,
-          33.85621722338523,
-          100.,
-        |],
-      );
-
-      testCases(
-        Easing.easeOutCirc,
-        "out",
-        [|0., 66.14378277661477, 86.60254037844386, 96.82458365518542, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutCirc,
-        "in-out",
-        [|0., 6.698729810778071, 50., 93.30127018922192, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInCirc,
-        "out-in",
-        [|0., 43.30127018922193, 50., 56.69872981077807, 100.|],
-      );
-    });
-
-    describe("back", () => {
-      testCases(
-        Easing.easeInBack,
-        "in",
-        [|
-          (-0.),
-          (-6.413656250000001),
-          (-8.769750000000004),
-          18.259031249999992,
-          99.99999999999997,
-        |],
-      );
-
-      testCases(
-        Easing.easeOutBack,
-        "out",
-        [|
-          2.220446049250313e-14,
-          81.74096875000001,
-          108.76975,
-          106.41365625000002,
-          100.,
-        |],
-      );
-
-      testCases(
-        Easing.easeInOutBack,
-        "in-out",
-        [|(-0.), (-4.384875000000002), 50.00000000000014, 104.384875, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInBack,
-        "out-in",
-        [|
-          1.1102230246251565e-14,
-          54.384875,
-          50.,
-          45.615125,
-          99.99999999999999,
-        |],
-      );
-    });
-
-    describe("elastic", () => {
-      testCases(
-        Easing.easeInElastic,
-        "in",
-        [|
-          0.,
-          (-0.5524271728019903),
-          (-1.5625000000000044),
-          8.838834764831844,
-          100.,
-        |],
-      );
-
-      testCases(
-        Easing.easeOutElastic,
-        "out",
-        [|0., 91.16116523516816, 101.5625, 100.552427172802, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutElastic,
-        "in-out",
-        [|0., (-0.7812500000000022), 50., 100.78125, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInElastic,
-        "out-in",
-        [|0., 50.78125, 50., 49.21875, 100.|],
-      );
-    });
-
-    describe("bounce", () => {
-      testCases(
-        Easing.easeInBounce,
-        "in",
-        [|0., 2.734375, 23.4375, 52.734375, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutBounce,
-        "out",
-        [|0., 47.265625, 76.5625, 97.265625, 100.|],
-      );
-
-      testCases(
-        Easing.easeInOutBounce,
-        "in-out",
-        [|0., 11.71875, 50., 88.28125, 100.|],
-      );
-
-      testCases(
-        Easing.easeOutInBounce,
-        "out-in",
-        [|0., 38.28125, 50., 61.71875, 100.|],
-      );
-    });
-
-    describe("linear", () =>
-      testCases(Easing.linear, "", [|0., 25., 50., 75., 100.|])
+    describe("sine", () =>
+      testCases({
+        in_: (
+          Easing.easeInSine,
+          [|
+            0.0,
+            0.07612046748871326,
+            0.2928932188134524,
+            0.6173165676349102,
+            1.0,
+          |],
+        ),
+        out: (
+          Easing.easeOutSine,
+          [|
+            0.0,
+            0.3826834323650898,
+            0.7071067811865475,
+            0.9238795325112867,
+            1.0,
+          |],
+        ),
+        inOut: (
+          Easing.easeInOutSine,
+          [|0.0, 0.1464466094067262, 0.5, 0.8535533905932737, 1.0|],
+        ),
+        outIn: (
+          Easing.easeOutInSine,
+          [|0.0, 0.35355339059327373, 0.5, 0.6464466094067263, 1.0|],
+        ),
+      })
     );
+
+    describe("quad", () =>
+      testCases({
+        in_: (Easing.easeInQuad, [|0.0, 0.0625, 0.25, 0.5625, 1.0|]),
+        out: (Easing.easeOutQuad, [|0.0, 0.4375, 0.75, 0.9375, 1.0|]),
+        inOut: (Easing.easeInOutQuad, [|0.0, 0.125, 0.5, 0.875, 1.0|]),
+        outIn: (Easing.easeOutInQuad, [|0.0, 0.375, 0.5, 0.625, 1.0|]),
+      })
+    );
+
+    describe("cubic", () =>
+      testCases({
+        in_: (Easing.easeInCubic, [|0.0, 0.015625, 0.125, 0.421875, 1.0|]),
+        out: (Easing.easeOutCubic, [|0.0, 0.578125, 0.875, 0.984375, 1.0|]),
+        inOut: (Easing.easeInOutCubic, [|0.0, 0.0625, 0.5, 0.9375, 1.0|]),
+        outIn: (Easing.easeOutInCubic, [|0.0, 0.4375, 0.5, 0.5625, 1.0|]),
+      })
+    );
+
+    describe("quart", () =>
+      testCases({
+        in_: (
+          Easing.easeInQuart,
+          [|0.0, 0.00390625, 0.0625, 0.31640625, 1.0|],
+        ),
+        out: (
+          Easing.easeOutQuart,
+          [|0.0, 0.68359375, 0.9375, 0.99609375, 1.0|],
+        ),
+        inOut: (Easing.easeInOutQuart, [|0.0, 0.03125, 0.5, 0.96875, 1.0|]),
+        outIn: (Easing.easeOutInQuart, [|0.0, 0.46875, 0.5, 0.53125, 1.0|]),
+      })
+    );
+
+    describe("quint", () =>
+      testCases({
+        in_: (
+          Easing.easeInQuint,
+          [|0.0, 0.0009765625, 0.03125, 0.2373046875, 1.0|],
+        ),
+        out: (
+          Easing.easeOutQuint,
+          [|0.0, 0.7626953125, 0.96875, 0.9990234375, 1.0|],
+        ),
+        inOut: (
+          Easing.easeInOutQuint,
+          [|0.0, 0.015625, 0.5, 0.984375, 1.0|],
+        ),
+        outIn: (
+          Easing.easeOutInQuint,
+          [|0.0, 0.484375, 0.5, 0.515625, 1.0|],
+        ),
+      })
+    );
+
+    describe("expo", () =>
+      testCases({
+        in_: (
+          Easing.easeInExpo,
+          [|0.0, 0.005524271728019903, 0.03125, 0.1767766952966369, 1.0|],
+        ),
+        out: (
+          Easing.easeOutExpo,
+          [|0.0, 0.8232233047033631, 0.96875, 0.99447572827198, 1.0|],
+        ),
+        inOut: (Easing.easeInOutExpo, [|0.0, 0.015625, 0.5, 0.984375, 1.0|]),
+        outIn: (Easing.easeOutInExpo, [|0.0, 0.484375, 0.5, 0.515625, 1.0|]),
+      })
+    );
+
+    describe("circ", () =>
+      testCases({
+        in_: (
+          Easing.easeInCirc,
+          [|
+            0.0,
+            0.031754163448145745,
+            0.1339745962155614,
+            0.3385621722338523,
+            1.0,
+          |],
+        ),
+        out: (
+          Easing.easeOutCirc,
+          [|
+            0.0,
+            0.6614378277661477,
+            0.8660254037844386,
+            0.9682458365518543,
+            1.0,
+          |],
+        ),
+        inOut: (
+          Easing.easeInOutCirc,
+          [|0.0, 0.0669872981077807, 0.5, 0.9330127018922193, 1.0|],
+        ),
+        outIn: (
+          Easing.easeOutInCirc,
+          [|0.0, 0.4330127018922193, 0.5, 0.5669872981077807, 1.0|],
+        ),
+      })
+    );
+
+    describe("back", () =>
+      testCases({
+        in_: (
+          Easing.easeInBack,
+          [|
+            0.0,
+            (-0.06413656250000001),
+            (-0.08769750000000004),
+            0.1825903124999999,
+            1.0,
+          |],
+        ),
+        out: (
+          Easing.easeOutBack,
+          [|
+            2.220446049250313e-16,
+            0.8174096875000001,
+            1.0876975,
+            1.0641365625,
+            1.0,
+          |],
+        ),
+        inOut: (
+          Easing.easeInOutBack,
+          [|
+            0.0,
+            (-0.04384875000000002),
+            0.5000000000000001,
+            1.04384875,
+            1.0,
+          |],
+        ),
+        outIn: (
+          Easing.easeOutInBack,
+          [|1.1102230246251565e-16, 0.54384875, 0.5, 0.45615125, 1.0|],
+        ),
+      })
+    );
+
+    describe("elastic", () =>
+      testCases({
+        in_: (
+          Easing.easeInElastic,
+          [|
+            0.0,
+            (-0.005524271728019903),
+            (-0.015625000000000045),
+            0.08838834764831845,
+            1.0,
+          |],
+        ),
+        out: (
+          Easing.easeOutElastic,
+          [|0.0, 0.9116116523516815, 1.015625, 1.00552427172802, 1.0|],
+        ),
+        inOut: (
+          Easing.easeInOutElastic,
+          [|0.0, (-0.007812500000000023), 0.5, 1.0078125, 1.0|],
+        ),
+        outIn: (
+          Easing.easeOutInElastic,
+          [|0.0, 0.5078125, 0.5, 0.4921875, 1.0|],
+        ),
+      })
+    );
+
+    describe("bounce", () =>
+      testCases({
+        in_: (
+          Easing.easeInBounce,
+          [|0.0, 0.02734375, 0.234375, 0.52734375, 1.0|],
+        ),
+        out: (
+          Easing.easeOutBounce,
+          [|0.0, 0.47265625, 0.765625, 0.97265625, 1.0|],
+        ),
+        inOut: (
+          Easing.easeInOutBounce,
+          [|0.0, 0.1171875, 0.5, 0.8828125, 1.0|],
+        ),
+        outIn: (
+          Easing.easeOutInBounce,
+          [|0.0, 0.3828125, 0.5, 0.6171875, 1.0|],
+        ),
+      })
+    );
+
+    describe("linear", () => {
+      let table = [|0.0, 0.25, 0.5, 0.75, 1.0|];
+
+      [|0., 0.25, 0.5, 0.75, 1.|]
+      ->Belt.Array.forEachWithIndex((index, elapsed) =>
+          test({j|t: $elapsed|j}, () =>
+            expect(Easing.linear(elapsed)) |> toBeCloseTo(table[index])
+          )
+        );
+    });
   });

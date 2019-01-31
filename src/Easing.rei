@@ -1,122 +1,41 @@
-let easeInSine:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutSine:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutSine:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInSine:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInQuad:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutQuad:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutQuad:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInQuad:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInCubic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutCubic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutCubic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInCubic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInQuart:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutQuart:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutQuart:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInQuart:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInQuint:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutQuint:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutQuint:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInQuint:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInExpo:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutExpo:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutExpo:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInExpo:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInCirc:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutCirc:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutCirc:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInCirc:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInBack:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutBack:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutBack:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInBack:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInElastic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutElastic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutElastic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInElastic:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInBounce:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutBounce:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeInOutBounce:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let easeOutInBounce:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
-
-let linear:
-  (float, ~start: float=?, ~final: float=?, ~duration: float=?, unit) => float;
+let easeInSine: float => float;
+let easeOutSine: float => float;
+let easeInOutSine: float => float;
+let easeOutInSine: float => float;
+let easeInQuad: float => float;
+let easeOutQuad: float => float;
+let easeInOutQuad: float => float;
+let easeOutInQuad: float => float;
+let easeInCubic: float => float;
+let easeOutCubic: float => float;
+let easeInOutCubic: float => float;
+let easeOutInCubic: float => float;
+let easeInQuart: float => float;
+let easeOutQuart: float => float;
+let easeInOutQuart: float => float;
+let easeOutInQuart: float => float;
+let easeInQuint: float => float;
+let easeOutQuint: float => float;
+let easeInOutQuint: float => float;
+let easeOutInQuint: float => float;
+let easeInExpo: float => float;
+let easeOutExpo: float => float;
+let easeInOutExpo: float => float;
+let easeOutInExpo: float => float;
+let easeInCirc: float => float;
+let easeOutCirc: float => float;
+let easeInOutCirc: float => float;
+let easeOutInCirc: float => float;
+let easeInBack: float => float;
+let easeOutBack: float => float;
+let easeInOutBack: float => float;
+let easeOutInBack: float => float;
+let easeInElastic: float => float;
+let easeOutElastic: float => float;
+let easeInOutElastic: float => float;
+let easeOutInElastic: float => float;
+let easeInBounce: float => float;
+let easeOutBounce: float => float;
+let easeInOutBounce: float => float;
+let easeOutInBounce: float => float;
+let linear: float => float;

@@ -24,6 +24,11 @@ commands:
           name: Build
           command: npm run build
 
+      # run tests
+      - run:
+          name: Test
+          command: npm run test
+
 jobs:
   node-v8:
     docker:

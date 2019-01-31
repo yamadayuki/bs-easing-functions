@@ -2,17 +2,22 @@
   "name": "bs-easing-functions",
   "version": "0.1.0",
   "sources": {
-    "dir" : "src",
-    "subdirs" : true
+    "dir": "src",
+    "subdirs": [
+      {
+        "dir": "__tests__",
+        "type": "dev"
+      }
+    ]
   },
   "package-specs": {
     "module": "commonjs",
     "in-source": false
   },
   "suffix": ".bs.js",
-  "bs-dependencies": [],
+  "bs-dependencies": ["@glennsl/bs-jest"],
   "warnings": {
-    "error" : "+101"
+    "error": "+101"
   },
   "refmt": 3
 }

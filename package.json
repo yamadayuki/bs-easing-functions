@@ -6,7 +6,7 @@
   "bugs": "https://github.com/yamadayuki/bs-easing-functions/issues",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.7",
-    "bs-platform": "^5.0.0"
+    "bs-platform": "^5.0.4"
   },
   "homepage": "https://github.com/yamadayuki/bs-easing-functions",
   "keywords": [

@@ -25,3 +25,5 @@ lib/bs
 .merlin
 .bsb.lock
 /lib/
+/src/**/*.bs.js
+/src/**/*.tsx

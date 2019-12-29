@@ -6,7 +6,8 @@
   "bugs": "https://github.com/yamadayuki/bs-easing-functions/issues",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.7",
-    "bs-platform": "^7.0.1"
+    "bs-platform": "^7.0.1",
+    "gentype": "^3.9.1"
   },
   "homepage": "https://github.com/yamadayuki/bs-easing-functions",
   "keywords": [
@@ -15,7 +16,7 @@
     "reason"
   ],
   "license": "MIT",
-  "main": "lib/js/src/Easing.bs.js",
+  "main": "src/Easing.bs.js",
   "repository": {
     "url": "https://github.com/yamadayuki/bs-easing-functions"
   },

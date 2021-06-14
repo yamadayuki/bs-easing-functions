@@ -1,0 +1,27 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: gentype
+    versions:
+    - 3.42.0
+    - 3.43.0
+    - 3.44.0
+    - 3.45.0
+  - dependency-name: bs-platform
+    versions:
+    - 8.4.2
+    - 9.0.0
+    - 9.0.1
+  - dependency-name: "@glennsl/bs-jest"
+    versions:
+    - 0.6.0
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
